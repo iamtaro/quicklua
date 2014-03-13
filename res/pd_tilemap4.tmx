@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="46" height="14" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="scene054_b" tilewidth="32" tileheight="32">
+  <image source="C:/Users/taro/Desktop/Desktop/Desktop/scene054_b.png" width="1500" height="450"/>
+ </tileset>
+ <layer name="路面" width="46" height="14">
+  <data encoding="base64" compression="zlib">
+   eJztw4dWSAEAANBXyoiMSqIyQsiWUZIUKntk7xVC2cpI1u9ZEcosZBWhhaj7B37g3XNuEIRCoVAoFPqfuxFBcM/7PvChtT7ysXU+8anPrLfB577wpa987RsbbfKt73xvsx/86Cc/+8UWW/3qN9v87g9/2m6HnXbZ7S9/+8ce//rPXoPIIIgw0n5GGW1/BzjQQcY42CHGOtRhDneEccab4EgTHWWSox1jsimmOtZxjneCaU50kpNNd4pTnWaG053hTGc52znOdZ6ZzneBC11kltkuNscl5rrUPJeZb4HLXeFKCy2y2FWudo1rXed6N7jRTW62xC1udZvb3eFOd7nbPe51n/s94EEPedgjlnrUYx63zBOe9JTlVnjaM571nOe94EUvWWmVl73iVa9Z7XVrvOFNb3nbO/YBvXVRWg==
+  </data>
+ </layer>
+ <layer name="墙" width="46" height="14">
+  <data encoding="base64" compression="zlib">
+   eJztwwPbHgQAQNH3m/3Ntm3btm3btm3btm2rttpqXs2sGWGd39Gz+9wTFAgEQhCSUIQmDGEJR3giEJFIRCYKwUQlGtGJQUxiEZs4xCUe8UlAQhKRmCQkJRnJSUFKUpGaNKQlHenJQEYykZksZCUb2clBTnKRmzzkJR/5KUBBClGYIhSlGMUpQUlKUZoylKUc5alARSpRmSpUpRrVqUFNalGbOtSlHvVpQEMa0ZgmNKUZzWlBS1rRmja0pR3t6UBHOtGZLnSlG93pQU960Zs+9KUf/RnAQAYxmCEMZRjDGcFIRjGaMYxlHOOZwEQmMZkpTGUa05nBTGYxmznMZR7zWcBCFrGYJSxlGctZwUpWsZo1rGUd69nARjaxmS1sZRvb2cFOdrGbPexlH/s5wEEOcZgjHOUYxznBSU5xmjOc5RznucBFLnGZH/iRK1zlJ37mGtf5hV+5wU1ucZs73OUe9/mN33nAQx7xmCc85RnPecFLXvGaP/iTN7zlHe/5wEc+8ZkvfOUv/uYf/uUbgSATgpCEIjRhCEs4whOBiEQiMlEIJirRiE4MYhKL2MQhLvGITwISkojEJCEpyUhOClKSitSkIS3pSE8GMpKJzGQhK9nITg5ykovc5CEv+chPAQpSiMIUoSjFKE4JSlKK0pShLOUoTwUqUonKVKEq1ahODWpSi9rUoS71qE8DGtKIxjShKc1oTgta0orWtKEt7WhPBzrSic50oSvd6E4PetKL3vShL/3ozwAGMojBDGEowxjOCEYyitGMYSzjGM8EJjKJyUxhKtOYzgxmMovZzGEu85jPAhayiMUsYSnLWM4KVrKK1axhLetYzwY2sonNbGEr29jODnayi93sYS/72M8BDnKIwxzhKMc4zglOcorTnOEs5zjPBS4GBb73vf91/wECB9H8
+  </data>
+ </layer>
+</map>
