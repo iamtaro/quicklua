@@ -10,9 +10,11 @@ local Hero
 local Delegate = require("scenes.Controller.SimpleDPadDelegate"):extend()
 local Robot = require("scenes.GameObjects.Robot")
 local DisabledRect
-local RobotCount = 10 --生成怪物数量
+--local RobotCount = 10 --生成怪物数量
 local TimeVal = 0
 
+
+local newLabel
 
 function GameLayer:ctor()
 
@@ -25,8 +27,8 @@ function GameLayer:ctor()
 	self:initHero();
 	self:initRobots();
 
-    self:addTouchEventListener(handler(self, self.onTouch))
-    self:setNodeEventEnabled(true)
+  self:addTouchEventListener(handler(self, self.onTouch))
+  self:setNodeEventEnabled(true)
 
 	--self.touchLayer = display.newLayer()
 	--self:addChild(self.touchLayer,2)
@@ -36,6 +38,15 @@ function GameLayer:ctor()
 	local updateFunc = function(dt) self:onUpdate(dt) end
 	self:scheduleUpdate(updateFunc)
 
+  newLabel = ui.newTTFLabel({        --创建一个面板调试
+          text = "剩余怪物数量：" ..RobotCount,
+          color = display.COLOR_WHITE,
+          size = 16,
+          align = ui.TEXT_ALIGN_CENTER,
+          --x, y = Hero:getPosition()
+          x = Hero:getPositionX() + 50,
+          y = Hero:getPositionY() + 100
+      }):addTo(self, 1)
 
 end
 
@@ -48,12 +59,30 @@ function GameLayer:onExit()
 end
 
 function GameLayer:onTouch(event, x, y)
+    local count = #self.RobotList --获取到机器人数量
+    local heroPosition = ccp(Hero:getPositionX(),Hero:getPositionY()) --获取到英雄位置
     --print("-----------have a touch---------------"..x.."----"..y) --处理触摸事件
     if x > (CONFIG_SCREEN_WIDTH/2) then --如果在屏幕右侧
         local heroHurt = Hero:getHurtPoint()
         print("heroHurt : "..heroHurt)
         if heroHurt > 0 then --如果死了就不能攻击了
             Hero:attack() --主角攻击
+            Hero:playAttackSound()
+
+            for i = 1, count do --遍历所有的机器人
+              local robot = self.RobotList[i]
+              if robot:getHurtPoint() >0 then   --先判断还存活
+                local getPositionX=robot:getPositionX()
+                local getPositionY=robot:getPositionY()
+                local robotPosition = ccp(getPositionX,getPositionY)  --获取机器人位置
+                print(robot:getName().." x="..getPositionX.." y="..getPositionY)
+                if math.abs(heroPosition.y - robotPosition.y) < 20 then --判断英雄和机器人坐标差是否小于20
+                  if robot:getHitBox().actual:intersectsRect(Hero:getAttackBox().actual) then
+                    robot:hurtWithDamage(Hero:getDamage()) --调用机器人掉血逻辑
+                  end                 
+                end
+              end
+            end
         end 
     end
 end
@@ -85,6 +114,14 @@ function GameLayer:initRobots() --创建机器人
 	end
 end
 
+function GameLayer:GetRebotCount()  --返回怪物数量
+  return RobotCount
+end
+
+function GameLayer:GetRebotLVCount()  --返回剩余怪物数量
+  return RebotLVCount
+end
+
 function GameLayer:updateRobots(dt)
   TimeVal = TimeVal + dt
   local alive = 0
@@ -92,10 +129,11 @@ function GameLayer:updateRobots(dt)
   local randomChoice
   local curTime = TimeVal * 1000
   local count = #self.RobotList
-  local heroPosition = ccp(Hero:getPositionX(),Hero:getPositionY())
-  for i = 1, count do
+  local heroPosition = ccp(Hero:getPositionX(),Hero:getPositionY()) --获取到英雄位置
+  local RebotLVCount = RobotCount  --获取还存活的机器人数量
+  for i = 1, count do --遍历所有的机器人
     local robot = self.RobotList[i]
-    local robotPosition = ccp(robot:getPositionX(),robot:getPositionY())
+    local robotPosition = ccp(robot:getPositionX(),robot:getPositionY())  --获取机器人位置
     robot:update(dt)
     if robot:getActionState() ~= ACTION_STATE_KNOCKOUT then
       alive = alive + 1
@@ -115,7 +153,7 @@ function GameLayer:updateRobots(dt)
             robot:setNextDecisionTime(curTime + math.random() * 2000)
             robot:attack()
             if robot:getActionState()  == ACTION_STATE_ATTACK then
-              if math.abs(heroPosition.y - robotPosition.y) < 10 then
+              if math.abs(heroPosition.y - robotPosition.y) < 20 then
                 if Hero:getHitBox().actual:intersectsRect(robot:getAttackBox().actual) then
                   Hero:hurtWithDamage(robot:getDamage())
                 end
@@ -136,8 +174,11 @@ function GameLayer:updateRobots(dt)
 
        end
      end
+    else
+    RebotLVCount =  RebotLVCount - 1
    end
  end
+ newLabel:setString("剩余怪物数量：" ..RebotLVCount)
 end
 
 function GameLayer:initTileMap()

@@ -7,11 +7,11 @@ require("scenes.Define")
 require("config")
 local Prototype = require("scenes.GameObjects.ActionSprite"):extend(Robot)
 --Animation Cache
-local ROBOT_IDLE = "RobotIdle"
-local ROBOT_ATTACK = "RobotAttack"
-local ROBOT_WALK = "RobotWalk"
-local ROBOT_HURT = "RobotHurt"
-local ROBOT_KNOCKOUT = "RobotKnockOut"
+local ROBOT_IDLE = "RobotIdle"   --机器人待机
+local ROBOT_ATTACK = "RobotAttack"  --机器人攻击
+local ROBOT_WALK = "RobotWalk"  ---机器人行走
+local ROBOT_HURT = "RobotHurt"  ---机器人受伤
+local ROBOT_KNOCKOUT = "RobotKnockOut"  --机器人死亡
 
 --attribute
 local WalkSpeed
@@ -23,9 +23,9 @@ local CenterToBottom
 
 function Robot:ctor(name)
 	self:setScale(scaleFactor)
-	WalkSpeed = 80
-	self.HurtPoint = 100
-	Damage = 10
+	WalkSpeed = 80 --移动速度
+	self.HurtPoint = 100  --初始血量
+	Damage = 10 --初始伤害
 	CenterToSide = 29
 	CenterToBottom = 39
 	self.ActionState = ACTION_STATE_NONE
@@ -78,7 +78,7 @@ end
 function Robot:createHurtAction()
 	--local frames = display.newFrames("robot_hurt_%02d.png",0,3)
 	local frames = display.newFrames("bdmonster055-hit-00%02d.png",0,0)
-	local animation = display.newAnimation(frames,1/12)
+	local animation = display.newAnimation(frames,1/2)
 	display.setAnimationCache(ROBOT_HURT,animation)
 	local idelFunc = CCCallFunc:create(function() self:idle() end)
 	self.HurtAction = CCSequence:createWithTwoActions(CCAnimate:create(animation),idelFunc)

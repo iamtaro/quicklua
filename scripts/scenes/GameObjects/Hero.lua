@@ -78,7 +78,7 @@ function Hero:createHurtAction()
 
   local frames = display.newFrames("bdhero002-hit-00%02d.png",1,1)
 
-  local animation = display.newAnimation(frames,1/12)
+  local animation = display.newAnimation(frames,1/2)
   display.setAnimationCache(HERO_HURT,animation)
   local idelFunc = CCCallFunc:create(function() self:idle() end)
   self.HurtAction = CCSequence:createWithTwoActions(CCAnimate:create(animation),idelFunc)
@@ -186,7 +186,10 @@ function Hero:attack()
 end
 
 function Hero:playAttackSound()
-  audio.playSound(GAME_SFX.HIT0)
+  if opensound == 1 then
+    print("play heroAttackSound")
+    audio.playSound(GAME_SFX.HIT0)
+  end
 end
 
 function Hero:playDeathSound()

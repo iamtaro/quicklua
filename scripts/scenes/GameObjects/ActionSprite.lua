@@ -121,7 +121,7 @@ function ActionSprite:transformBoxes()
     local originX
 
     --if self:getScaleX() == -1 * scaleFactor then
-    if self:getScaleX() == -1 * scaleFactor then
+    if self:getScaleX() == -1 then ---判断方向
         originX = - attackBox.original.size.width - hitBox.original.size.width
     else
         originX = 0

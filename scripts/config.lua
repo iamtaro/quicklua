@@ -31,3 +31,7 @@ CONFIG_SCREEN_AUTOSCALE = "FIXED_WIDTH"
 scaleFactor = 0.65 --Sprite缩放系数
 
 opensound = 0 --开启音乐
+
+RobotCount = 10 --怪物数量
+
+debuginfo = ""
